@@ -57,3 +57,13 @@ async def upload_document(file: UploadFile = File(...)):
     result = process_document(filepath)
     return JSONResponse(content={"file_id": file_id, "summary": result})
 
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # or ["https://your-vercel-app.vercel.app"]
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
