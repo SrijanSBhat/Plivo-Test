@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE = "http://localhost:8000"; // change to your backend URL
+const API_BASE = "https://plivo-test.onrender.com"; // change to your backend URL
 
 export async function uploadFile(endpoint, file) {
   const formData = new FormData();
