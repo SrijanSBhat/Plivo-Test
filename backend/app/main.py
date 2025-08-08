@@ -8,6 +8,12 @@ import os
 from app.pipelines.audio_pipeline import process_audio
 from app.pipelines.image_pipeline import process_image
 from app.pipelines.doc_pipeline import process_document
+import os
+import uvicorn
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
 
 UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
