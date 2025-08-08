@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pyannote.audio
+transformers
+torch
+Pillow
+PyMuPDF
+requests
+huggingface_hub
