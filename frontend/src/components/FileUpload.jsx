@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { uploadFile } from "../api";
 
 export default function FileUpload({ type, onResult }) {
@@ -6,7 +6,16 @@ export default function FileUpload({ type, onResult }) {
   const [loading, setLoading] = useState(false);
 
   const handleUpload = async () => {
+    const username = localStorage.getItem("username");
+
+    // Block if not logged in
+    if (!username) {
+      alert("You must be logged in to upload files.");
+      return;
+    }
+
     if (!file) return alert("Please select a file first");
+
     setLoading(true);
     try {
       let endpoint;
@@ -14,7 +23,9 @@ export default function FileUpload({ type, onResult }) {
       if (type === "image") endpoint = "/upload/image";
       if (type === "document") endpoint = "/upload/document";
 
-      const result = await uploadFile(endpoint, file);
+      const result = await uploadFile(endpoint, file, {
+        headers: { "X-Dummy-User": username }, // attach dummy auth
+      });
       onResult(result);
     } catch (err) {
       console.error(err);
